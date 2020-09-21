@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 
 services:
   greeter-server:
@@ -15,7 +15,7 @@ services:
     environment:
       - USE_MTLS=$USE_MTLS
     networks:
-      - greeter-network
+      - greeter
     volumes:
       - ./logs:/mnt/logs
   greeter-client:
@@ -30,9 +30,10 @@ services:
     environment:
       - USE_MTLS=$USE_MTLS
     networks:
-      - greeter-network
+      - greeter
     volumes:
       - ./logs:/mnt/logs
 networks:
-  greeter-network:
+  greeter:
     driver: "bridge"
+    name: greeter
