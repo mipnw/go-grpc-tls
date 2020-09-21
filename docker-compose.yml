@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  greeter-server:
+    container_name: greeter
+    image: greeter-server
+    build:
+      context: .
+      dockerfile: cmd/greeter-server/Dockerfile
+    hostname: greeter
+    ports:
+      - "8080:8080"
+    stdin_open: true
+    tty: true
+    environment:
+      - USE_MTLS=$USE_MTLS
+    networks:
+      - greeter-network
+    volumes:
+      - ./logs:/mnt/logs
+  greeter-client:
+    container_name: greeter-client
+    image: greeter-client
+    build:
+      context: .
+      dockerfile: cmd/greeter-client/Dockerfile
+    hostname: greeter-client
+    stdin_open: true
+    tty: true
+    environment:
+      - USE_MTLS=$USE_MTLS
+    networks:
+      - greeter-network
+    volumes:
+      - ./logs:/mnt/logs
+networks:
+  greeter-network:
+    driver: "bridge"

@@ -1,0 +1,7 @@
+logs/
+secrets/
+vendor/
+*.pb.go
+*_pb2.py
+*_pb2_grpc.py
+__pycache__/
